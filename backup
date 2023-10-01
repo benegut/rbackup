@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# awesome dir
+cd ~/.config/awesome
+git add .
+git commit -m "backup" || git push
+cd -
+
+# chezmoi
+cd ~/.local/share/chezmoi
+git add .
+cd -
+
+rsync -aAXuv --delete / --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/swapfile"} \
+	/mnt/backup

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rsync -aAXuv --delete koyo@oniisan.hopto.org:rsync/.mail/ ~/.mail

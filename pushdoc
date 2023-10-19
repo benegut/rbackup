@@ -6,4 +6,4 @@ if [[ -n $EXTRA_ARG ]]; then
 	echo "Add extra Argument $EXTRA_ARG";
 fi
 
-rsync -aAXuv $EXTRA_ARG --delete /u/bgutsche/doc koyo@oniisan.hopto.org:rsync
+rsync -aAXuv $EXTRA_ARG --delete ~/doc koyo@oniisan.hopto.org:rsync

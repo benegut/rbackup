@@ -1,3 +1,9 @@
 #!/bin/bash
 
-rsync -aAXuv --delete ~/doc koyo@oniisan.hopto.org:rsync
+EXTRA_ARG=$1
+
+if [[ -n $EXTRA_ARG ]]; then
+	echo "Add extra Argument $EXTRA_ARG";
+fi
+
+rsync -aAXuv $EXTRA_ARG --delete /u/bgutsche/doc koyo@oniisan.hopto.org:rsync

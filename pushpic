@@ -1,9 +1,22 @@
 #!/bin/bash
 
-EXTRA_ARG=$1
+DELETE="--delete"
+POSITIONAL_ARGS=()
 
-if [[ -n $EXTRA_ARG ]]; then
-	echo "Add extra Argument $EXTRA_ARG";
-fi
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -m|--merge)
+      DELETE=""
+      shift # past argument
+#      shift # past value
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
 
-rsync -aAXuv $EXTRA_ARG --delete ~/pic koyo@oniisan.hopto.org:rsync
+set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+
+rsync -aAXuv $DELETE ${POSITIONAL_ARGS[@]} ~/pic koyo@oniisan.hopto.org:rsync

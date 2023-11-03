@@ -3,15 +3,15 @@
 DELETE="--delete"
 POSITIONAL_ARGS=()
 
-while [[ $# -gt 0 ]]; do
-  case $1 in
+while [[ ${#} -gt 0 ]]; do
+  case ${1} in
     -m|--merge)
       DELETE=""
       shift # past argument
 #      shift # past value
       ;;
     *)
-      POSITIONAL_ARGS+=("$1") # save positional arg
+      POSITIONAL_ARGS+=("${1}") # save positional arg
       shift # past argument
       ;;
   esac
@@ -19,4 +19,4 @@ done
 
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
-rsync -aAXuv $DELETE ${POSITIONAL_ARGS[@]} koyo@oniisan.hopto.org:rsync/doc/ ~/doc
+rsync -aAXuv ${DELETE} ${POSITIONAL_ARGS[@]} koyo@oniisan.hopto.org:rsync/doc/ ~/doc

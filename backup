@@ -1,15 +1,97 @@
 #!/bin/bash
 
-# awesome dir
-cd ~/.config/awesome
-git add .
-git commit -m "backup" || git push
-cd -
 
-# chezmoi
-cd ~/.local/share/chezmoi
-git add .
-cd -
+cmd=`basename $0`
+
+
+if [[ "$cmd" = "pull" ]]; then
+    mode='PULL'
+elif [[ "$cmd" = "push" ]]; then
+    mode='PUSH'
+elif [[ "$cmd" = "backup" ]]; then
+    mode='SCRIPT'
+else
+    echo "Unknown mode detected. Probably a wrong soft link. Abort"
+    exit 71
+fi
+
+
+show_help()
+{
+    cat <<EOF
+usage: $cmd
+EOF
+}
+
+
+if [[ "$1" = '-h' ]]; then
+    show_help; exit
+fi
+
+name=$1
+shift
+
+
+DELETE="--delete"
+POSITIONAL_ARGS=()
+
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        '-m'|'--merge')
+            DELETE=""
+            shift
+            ;;
+        '-h'|'-?'|'--help')
+            show_help
+            exit
+            ;;
+        *)
+            POSITIONAL_ARGS+=("$1") # save positional arg
+            shift
+            ;;
+    esac
+done
+
+# set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+
+system_config='/etc/backup.conf'
+user_config="$HOME/.config/backup/backup.conf"
+
+lc=0
+declare -a arr=0
+
+load_config ()
+{
+    sed '/^\s*#/d;/^$/d' $1 | while read line; do
+        declare -a tmp=($line)
+        if [[ $name = ${tmp[0]} ]]; then
+            arr=($line)
+            echo ${arr[0]}
+            break
+        fi
+        # eval "declare -a arr=($line)"
+        # eval "declare -a arr_${tmp[0]}=($line)"
+        # eval "echo -e \${arr_${tmp[0]}[0]}"
+    done
+}
+
+
+if [[ -e ${user_config} ]]; then
+    load_config ${user_config}
+elif [[ -e ${system_config} ]]; then
+    load_config ${system_config}
+else
+    echo "No config found. Abort."
+    exit 70
+fi
+
+
+echo ${arr[0]}
+
+
+exit
+
+rsync -aAXuv $DELETE ${POSITIONAL_ARGS[@]}
 
 rsync -aAXuv --delete / --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/swapfile"} \
-	/mnt/backup
+    /mnt/backup

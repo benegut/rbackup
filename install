@@ -1,0 +1,66 @@
+#!/bin/bash
+
+configdir="${HOME}/.config/backup"
+
+if ! [[ -d "${configdir}" ]]; then
+    mkdir -p "${configdir}"
+fi
+
+configfile="${configdir}/backup.conf"
+
+if ! [[ -f "${configfile}" ]]; then
+    mv example_backup.conf "${configfile}"
+fi
+
+scriptname="backup"
+pullname="pull"
+pushname="push"
+
+(
+    IFS=:
+    for p in $PATH; do
+        if [[ -f "${p%/}/${scriptname}" ]]; then
+            echo "Name conflict in PATH with ${p}/${scriptname}. Exiting."
+            exit 1
+        elif [[ -f "${p%/}/${pullname}" ]]; then
+            echo "Name conflict in PATH with ${p}/${pullname}. Exiting."
+            exit 1
+        elif [[ -f "${p%/}/${pushname}" ]]; then
+            echo "Name conflict in PATH with ${p}/${pushname}. Exiting."
+            exit 1
+        fi
+    done
+)
+
+installdir="${HOME}/.local/bin"
+
+if ! [[ -d "${installdir}" ]]; then
+    mkdir -p "${installdir}"
+else
+    if [[ -f "${installdir}/${scriptname}" ]]; then
+        echo "Name conflict in install dir with ${installdir}/${scriptname}. Exiting."
+        exit 1
+    elif [[ -f "${installdir}/${pullname}" ]]; then
+        echo "Name conflict in install dir with ${installdir}/${pullname}. Exiting."
+        exit 1
+    elif [[ -f "${installdir}/${pushname}" ]]; then
+        echo "Name conflict in install dir with ${installdir}/${pushname}. Exiting."
+        exit 1
+    fi
+fi
+
+cp "${scriptname}" "${installdir}"
+chmod 775 "${installdir}/${scriptname}"
+ln -s "${installdir}/${scriptname}" "${installdir}/${pullname}"
+ln -s "${installdir}/${scriptname}" "${installdir}/${pushname}"
+
+if ! [[ "${PATH}" =~ "${installdir}" ]]; then
+    cat << EOF
+You don't seem to have the install dir ${installdir} in your \$PATH. Add something like
+    export PATH=${installdir}:\${PATH}
+to your .bashrc.
+EOF
+fi
+
+echo "Done."
+exit 0

@@ -11,7 +11,9 @@ After installation, you can find the config file =~/.config/backup/backup.conf=,
 Each line of the file is one backup strategy, consisting of a name, the directory to backup, the remote host address and the remote directory, where the backup will be put.
 Example:
 #+begin_src
-doc /home/user/Documents/ user@host backups/
+NAME     BACK_THIS_UP                REMOTE_URL   WHERE_TO_PUT_IT
+doc /home/exampleuser/Documents/ exampleuser@host backups/
 #+end_src
+
 
 ** Usage

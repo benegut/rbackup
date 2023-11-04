@@ -2,9 +2,11 @@
 
 ** Installguide
 #+begin_src bash
-\# ./install
+# ./install
 #+end_src
 
 ** Configuration
 After installation, you can find the config file =~/.config/backup/backup.conf=, which you should edit.
 Each line of the file is one backup strategy, consisting of a name, the directory to backup, the remote host address and the remote directory, where the backup will be put.
+
+** Usage

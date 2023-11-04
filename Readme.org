@@ -10,8 +10,8 @@ This will place the script and two symlinks in =~/.local/bin/=, and a example co
 After installation, you can find the config file =~/.config/backup/backup.conf=, which you should edit.
 Each line of the file is one backup strategy, consisting of a name, the directory to backup, the remote host address and the remote directory, where the backup will be put.
 Example:
-#+begin_quote
+#+begin_src
 doc /home/user/Documents/ user@host backups/
-#+end_quote
+#+end_src
 
 ** Usage

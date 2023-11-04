@@ -1,4 +1,5 @@
 * A simple backup script
+This is a simple script I use, to backup and synchronize certain direcotries on my machines. The problem was, that I wanted my Documents and other directories to be present on three different machines, all holding the same content. I use rsync to push those folders to my server and pulling them the same way on other machines. This script is merely a wrapper around rsync, allowing to achieve this in a even simpler manner.
 
 ** Installguide
 #+begin_src bash
@@ -14,6 +15,16 @@ Example:
 # NAME            BACK_THIS_UP            REMOTE_URL    WHERE_TO_PUT_IT
 documents /home/exampleuser/Documents/ exampleuser@host backups/
 #+end_src
-
+The backup target musst be specified as full path. The remote url musst be smth, rsync understands, so, another folder on the local machine or a mounted drive is also possible. The remote location can be relative to the home dir of the user in the url.
 
 ** Usage
+After configuration, execute the following, to back the directory up:
+#+begin_src bash
+push NAME
+#+end_src
+Where NAME is specified in the config file.
+The following pulls the backup to its original location:
+#+begin_src bash
+pull NAME
+#+end_src
+All rsync command line arguments can specified. In addition, see =--help= for additional arguments.

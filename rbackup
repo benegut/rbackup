@@ -8,7 +8,7 @@ if [[ "$cmd" = "pull" ]]; then
     mode='PULL'
 elif [[ "$cmd" = "push" ]]; then
     mode='PUSH'
-elif [[ "$cmd" = "backup" ]]; then
+elif [[ "$cmd" = "bckp" ]]; then
     mode='SCRIPT'
 else
     echo "Unknown mode detected. Probably a wrong soft link. Abort"

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-chrootdir=""
 
 configdir="${chrootdir}${HOME}/.config/backup"
 
@@ -14,7 +13,7 @@ if ! [[ -f "${configfile}" ]]; then
     mv example_backup.conf "${configfile}"
 fi
 
-scriptname="backup"
+scriptname="bckp"
 pullname="pull"
 pushname="push"
 

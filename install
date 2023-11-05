@@ -1,16 +1,10 @@
 #!/bin/bash
 
 
-configdir="${chrootdir}${HOME}/.config/rbackup"
-
-if ! [[ -d "${configdir}" ]]; then
-    mkdir -p "${configdir}"
-fi
-
-configfile="${configdir}/rbackup.conf"
+configfile="${chrootdir}/etc/rbackup.conf"
 
 if ! [[ -f "${configfile}" ]]; then
-    mv example_backup.conf "${configfile}"
+    cp example_backup.conf "${configfile}"
 fi
 
 scriptname="rbackup"
@@ -33,7 +27,7 @@ pushname="push"
     done
 )
 
-installdir="${chrootdir}${HOME}/.local/bin"
+installdir="${chrootdir}/bin"
 
 if ! [[ -d "${installdir}" ]]; then
     mkdir -p "${installdir}"

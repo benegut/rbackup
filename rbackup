@@ -57,8 +57,8 @@ name=$1
 shift
 
 
-system_config='/etc/backup.conf'
-user_config="$HOME/.config/rbackup/rbackup.conf"
+system_config='/etc/rbackup.conf'
+user_config="$HOME/.config/rbackup.conf"
 
 declare -a arr=0
 

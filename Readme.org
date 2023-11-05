@@ -5,10 +5,10 @@ This is a simple script I use, to backup and synchronize certain direcotries on 
 #+begin_src bash
 ./install
 #+end_src
-This will place the script and two symlinks in =~/.local/bin/=, and a example configuration file in =~/.config/rbackup/=.
+This will place the script and two symlinks in =/bin=, and a example configuration file in =/etc/rbackup.conf=.
 
 ** Configuration
-After installation, you can find the config file =~/.config/rbackup/rbackup.conf=, which you should edit.
+After installation, you can find the config file =/etc/rbackup.conf=, which you should copy to =~/.config/backup.conf= and edit.
 Each line of the file is one backup strategy, consisting of a name, the directory to backup, the remote host address and the remote directory, where the backup will be put.
 Example:
 #+begin_src

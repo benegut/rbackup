@@ -1,19 +1,19 @@
 #!/bin/bash
 
 
-configdir="${chrootdir}${HOME}/.config/backup"
+configdir="${chrootdir}${HOME}/.config/rbackup"
 
 if ! [[ -d "${configdir}" ]]; then
     mkdir -p "${configdir}"
 fi
 
-configfile="${configdir}/backup.conf"
+configfile="${configdir}/rbackup.conf"
 
 if ! [[ -f "${configfile}" ]]; then
     mv example_backup.conf "${configfile}"
 fi
 
-scriptname="bckp"
+scriptname="rbackup"
 pullname="pull"
 pushname="push"
 

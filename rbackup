@@ -8,7 +8,7 @@ if [[ "$cmd" = "pull" ]]; then
     mode='PULL'
 elif [[ "$cmd" = "push" ]]; then
     mode='PUSH'
-elif [[ "$cmd" = "bckp" ]]; then
+elif [[ "$cmd" = "rbackup" ]]; then
     mode='SCRIPT'
 else
     echo "Unknown mode detected. Probably a wrong soft link. Abort"
@@ -58,7 +58,7 @@ shift
 
 
 system_config='/etc/backup.conf'
-user_config="$HOME/.config/backup/backup.conf"
+user_config="$HOME/.config/rbackup/rbackup.conf"
 
 declare -a arr=0
 

@@ -87,11 +87,11 @@ localdir=${data[1]%/}
 remoteurl=${data[2]}
 remotedir=${data[3]%/}
 
-echo "${localdir}"
-echo ${remoteurl}
-echo ${remotedir}
-echo "${remotedir}/$(basename ${localdir})"
-echo "${rsyncargs[@]}"
+# echo "${localdir}"
+# echo ${remoteurl}
+# echo ${remotedir}
+# echo "${remotedir}/$(basename ${localdir})"
+# echo "${rsyncargs[@]}"
 
 
 if [[ "${mode}" = "PULL" ]]; then

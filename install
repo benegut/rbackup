@@ -1,6 +1,8 @@
 #!/bin/bash
 
-configdir="${HOME}/.config/backup"
+chrootdir=""
+
+configdir="${chrootdir}${HOME}/.config/backup"
 
 if ! [[ -d "${configdir}" ]]; then
     mkdir -p "${configdir}"
@@ -32,7 +34,7 @@ pushname="push"
     done
 )
 
-installdir="${HOME}/.local/bin"
+installdir="${chrootdir}${HOME}/.local/bin"
 
 if ! [[ -d "${installdir}" ]]; then
     mkdir -p "${installdir}"
